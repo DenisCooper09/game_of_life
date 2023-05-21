@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "game_of_life_algorithm.h"
 
 int main() {
     sf::ContextSettings settings;
@@ -12,6 +13,8 @@ int main() {
                             sf::Style::Close,
                             settings);
 
+    game_of_life_algorithm game_of_life(WINDOW_WIDTH, WINDOW_HEIGHT, 20);
+
     while (window.isOpen()) {
         sf::Event event{};
         while (window.pollEvent(event)) {
@@ -20,7 +23,10 @@ int main() {
             }
         }
 
+        game_of_life.update(window, event);
+
         window.clear(sf::Color::Black);
+        game_of_life.draw_cells(window);
         window.display();
     }
 

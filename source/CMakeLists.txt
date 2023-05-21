@@ -1,5 +1,7 @@
 set(SOURCES
         main.cpp
+        game_of_life_algorithm.cpp
+        game_of_life_algorithm.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
