@@ -93,6 +93,8 @@ public:
     [[maybe_unused]] uint32_t get_generations_count() const;
 
     [[maybe_unused]] sf::Vector2<uint32_t> get_selected_cell_position();
+
+    [[maybe_unused]] bool get_cell(const uint32_t &cell_x, const uint32_t &cell_y);
 };
 
 #endif

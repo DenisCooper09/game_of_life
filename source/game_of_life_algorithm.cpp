@@ -241,3 +241,7 @@ void game_of_life_algorithm::clear() {
 
     return {0, 0};
 }
+
+[[maybe_unused]] bool game_of_life_algorithm::get_cell(const uint32_t &cell_x, const uint32_t &cell_y) {
+    return _cells[cell_y][cell_x];
+}
