@@ -1,7 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "game_of_life_algorithm.h"
+#include "resources_loader.h"
 
 int main() {
+    sf::Font main_font;
+    if (!load_font("../fonts/Roboto-Regular.ttf", main_font)) {
+        std::cout << "The font could not be loaded properly.";
+        system("pause>nul");
+        return -1;
+    }
+
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
