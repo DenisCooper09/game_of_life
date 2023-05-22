@@ -65,7 +65,7 @@ int main() {
             if (event.type == sf::Event::EventType::Closed) {
                 window.close();
             } else if (event.type == sf::Event::EventType::MouseWheelScrolled) {
-                generations_per_second += event.mouseWheelScroll.delta * 0.5f;
+                generations_per_second += event.mouseWheelScroll.delta / 2.0f;
                 if (generations_per_second > 20.0f) {
                     generations_per_second = 1.0f;
                 } else if (generations_per_second <= 0.0f) {
