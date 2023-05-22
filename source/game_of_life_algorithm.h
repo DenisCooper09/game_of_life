@@ -45,6 +45,8 @@ private:
 
     uint32_t _selection_size = 1;
 
+    uint32_t _generations_count = 0;
+
     void prepare_for_drawing();
 
     uint8_t calculate_neighbors(const uint32_t &cell_x,
@@ -87,6 +89,10 @@ public:
     [[maybe_unused]] void set_selection_color(const sf::Color &color);
 
     [[maybe_unused]] void set_grid_color(const sf::Color &color);
+
+    [[maybe_unused]] uint32_t get_generations_count() const;
+
+    [[maybe_unused]] sf::Vector2<uint32_t> get_selected_cell_position();
 };
 
 #endif

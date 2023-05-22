@@ -164,6 +164,7 @@ game_of_life_algorithm::~game_of_life_algorithm() {
         _is_running = !_is_running;
     } else if (event.key.code == sf::Keyboard::Key::C) {
         clear();
+        _generations_count = 0;
     }
 
     if (_is_running && !is_drawing_cells) {
@@ -173,6 +174,7 @@ game_of_life_algorithm::~game_of_life_algorithm() {
     if (_elapsed_time >= _delay) {
         _elapsed_time = sf::Time::Zero;
         generate_new_generation();
+        _generations_count++;
     }
 }
 
@@ -223,4 +225,19 @@ void game_of_life_algorithm::clear() {
 
 [[maybe_unused]] void game_of_life_algorithm::set_grid_color(const sf::Color &color) {
     _grid_color = color;
+}
+
+[[maybe_unused]] uint32_t game_of_life_algorithm::get_generations_count() const {
+    return _generations_count;
+}
+
+[[maybe_unused]] sf::Vector2<uint32_t> game_of_life_algorithm::get_selected_cell_position() {
+    if (_selected_cell.x >= 0 &&
+        _selected_cell.y >= 0 &&
+        _selected_cell.x < _game_of_life_width &&
+        _selected_cell.y < _game_of_life_height) {
+        return _selected_cell;
+    }
+
+    return {0, 0};
 }
