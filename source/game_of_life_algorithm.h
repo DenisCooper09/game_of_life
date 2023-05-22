@@ -49,16 +49,19 @@ private:
 
     void prepare_for_drawing();
 
-    uint8_t calculate_neighbors(const uint32_t &cell_x,
-                                const uint32_t &cell_y,
-                                bool **cells) const;
-
 public:
     [[maybe_unused]] game_of_life_algorithm(const uint32_t &screen_width,
                                             const uint32_t &screen_height,
                                             const uint32_t &cell_size);
 
     ~game_of_life_algorithm();
+
+    uint8_t calculate_neighbors(const uint32_t &cell_x,
+                                const uint32_t &cell_y,
+                                bool **cells) const;
+
+    uint8_t calculate_neighbors(const uint32_t &cell_x,
+                                const uint32_t &cell_y) const;
 
     [[maybe_unused]] void update(sf::RenderWindow &window, sf::Event &event);
 

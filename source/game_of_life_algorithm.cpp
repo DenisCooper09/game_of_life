@@ -42,31 +42,6 @@ void game_of_life_algorithm::prepare_for_drawing() {
     _cells_sprite.setTexture(_cells_texture);
 }
 
-uint8_t game_of_life_algorithm::calculate_neighbors(const uint32_t &cell_x,
-                                                    const uint32_t &cell_y,
-                                                    bool **cells) const {
-    uint8_t neighbors = 0;
-
-    const uint32_t START_X = cell_x >= 1 ? cell_x - 1 : cell_x;
-    const uint32_t START_Y = cell_y >= 1 ? cell_y - 1 : cell_y;
-    const uint32_t LIMIT_X = cell_x + 1 < _game_of_life_width ? cell_x + 1 : cell_x;
-    const uint32_t LIMIT_Y = cell_y + 1 < _game_of_life_height ? cell_y + 1 : cell_y;
-
-    for (uint32_t y = START_Y; y <= LIMIT_Y; ++y) {
-        for (uint32_t x = START_X; x <= LIMIT_X; ++x) {
-            if (cells[y][x]) {
-                neighbors++;
-            }
-        }
-    }
-
-    if (cells[cell_y][cell_x] && neighbors > 0) {
-        --neighbors;
-    }
-
-    return neighbors;
-}
-
 [[maybe_unused]] game_of_life_algorithm::game_of_life_algorithm(const uint32_t &screen_width,
                                                                 const uint32_t &screen_height,
                                                                 const uint32_t &cell_size) {
@@ -98,6 +73,36 @@ game_of_life_algorithm::~game_of_life_algorithm() {
     delete[] _cells;
 }
 
+uint8_t game_of_life_algorithm::calculate_neighbors(const uint32_t &cell_x,
+                                                    const uint32_t &cell_y,
+                                                    bool **cells) const {
+    uint8_t neighbors = 0;
+
+    const uint32_t START_X = cell_x >= 1 ? cell_x - 1 : cell_x;
+    const uint32_t START_Y = cell_y >= 1 ? cell_y - 1 : cell_y;
+    const uint32_t LIMIT_X = cell_x + 1 < _game_of_life_width ? cell_x + 1 : cell_x;
+    const uint32_t LIMIT_Y = cell_y + 1 < _game_of_life_height ? cell_y + 1 : cell_y;
+
+    for (uint32_t y = START_Y; y <= LIMIT_Y; ++y) {
+        for (uint32_t x = START_X; x <= LIMIT_X; ++x) {
+            if (cells[y][x]) {
+                neighbors++;
+            }
+        }
+    }
+
+    if (cells[cell_y][cell_x] && neighbors > 0) {
+        --neighbors;
+    }
+
+    return neighbors;
+}
+
+uint8_t game_of_life_algorithm::calculate_neighbors(const uint32_t &cell_x,
+                                                    const uint32_t &cell_y) const {
+    return calculate_neighbors(cell_x, cell_y, _cells);
+}
+
 [[maybe_unused]] void game_of_life_algorithm::generate_new_generation() {
     bool **previous_cells_state = new bool *[_game_of_life_height];
     for (uint32_t y = 0; y < _game_of_life_height; ++y) {
@@ -125,7 +130,6 @@ game_of_life_algorithm::~game_of_life_algorithm() {
 
     delete[] previous_cells_state;
 }
-
 
 [[maybe_unused]] void game_of_life_algorithm::start_generating_new_generations() {
     _is_running = true;

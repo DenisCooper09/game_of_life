@@ -57,6 +57,12 @@ int main() {
     selected_cell_state_text.setPosition(WINDOW_HEIGHT + 15, 130);
     selected_cell_state_text.setCharacterSize(24);
 
+    sf::Text selected_cell_neighbors_count;
+    selected_cell_neighbors_count.setFont(main_font);
+    selected_cell_neighbors_count.setFillColor(sf::Color::Green);
+    selected_cell_neighbors_count.setPosition(WINDOW_HEIGHT + 15, 170);
+    selected_cell_neighbors_count.setCharacterSize(24);
+
     game_of_life_algorithm game_of_life(WINDOW_HEIGHT, WINDOW_HEIGHT, 20);
 
     while (window.isOpen()) {
@@ -95,6 +101,13 @@ int main() {
                 game_of_life.get_selected_cell_position().y) ? "ALIVE" : "DEAD")
         );
 
+        selected_cell_neighbors_count.setString(
+                "Neighbors: " + std::to_string(game_of_life.calculate_neighbors(
+                        game_of_life.get_selected_cell_position().x,
+                        game_of_life.get_selected_cell_position().y
+                ))
+        );
+
         window.clear(sf::Color::Black);
 
         game_of_life.draw_cells(window);
@@ -103,6 +116,7 @@ int main() {
         window.draw(generations_per_second_text);
         window.draw(selected_cell_position_text);
         window.draw(selected_cell_state_text);
+        window.draw(selected_cell_neighbors_count);
 
         window.display();
     }
