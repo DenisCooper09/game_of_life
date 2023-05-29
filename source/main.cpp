@@ -14,7 +14,7 @@ std::string to_string_with_precision(const T &value, const int &n = 1) {
 
 int main() {
     sf::Font main_font;
-    if (!load_font("../fonts/Roboto-Regular.ttf", main_font)) {
+    if (!load_font("Roboto-Regular.ttf", main_font)) {
         std::cout << "The font could not be loaded properly.";
         system("pause>nul");
         return -1;
